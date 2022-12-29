@@ -74,7 +74,6 @@ function getPolynom(...args) {
   }
 
   return () => null;
-  throw new Error('Not implemented');
 }
 
 
@@ -123,6 +122,7 @@ function retry(func, attempts) {
         currentAttempts += 1;
       }
     }
+    return undefined;
   };
 }
 
@@ -196,9 +196,12 @@ function partialUsingArguments(fn, ...oldArgs) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-  let initialId = startFrom;
+  let initialId = startFrom - 1;
 
-  return () => initialId++;
+  return () => {
+    initialId += 1;
+    return initialId;
+  };
 }
 
 
